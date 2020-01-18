@@ -1,0 +1,450 @@
+Copying runtime jar.
+[info] Loading settings for project global-plugins from idea.sbt ...
+[info] Loading global plugins from C:\Users\mercu\.sbt\1.0\plugins
+[info] Loading settings for project sbt-swagger-generator-plugin-build from plugins.sbt ...
+[info] Loading project definition from D:\Users\mercu\Documents\sbt-swagger-generator-plugin\project
+[info] Loading settings for project root from build.sbt ...
+[info] Set current project to sbt-swagger-generator-plugin (in build file:/D:/Users/mercu/Documents/sbt-swagger-generator-plugin/)
+[warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
+[info] com.github.mercurievv.sbt.swagger.generator:sbt-swagger-generator-plug..
+[info]   +-org.openapitools:openapi-generator:4.2.2
+[info]     +-com.atlassian.commonmark:commonmark:0.11.0
+[info]     +-com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.10
+[info]     | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | +-com.fasterxml.jackson.core:jackson-core:2.9.10 (evicted by: 2...
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | 
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.9.10 (evicted by..
+[info]     | +-com.google.guava:guava:18.0 (evicted by: 27.0.1-android)
+[info]     | +-com.google.guava:guava:27.0.1-android
+[info]     |   +-com.google.code.findbugs:jsr305:3.0.2
+[info]     |   +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     |   +-com.google.guava:failureaccess:1.0.1
+[info]     |   +-com.google.guava:listenablefuture:9999.0-empty-to-avoid-conf..
+[info]     |   +-com.google.j2objc:j2objc-annotations:1.1
+[info]     |   +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     |   +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     |   
+[info]     +-com.fasterxml.jackson.datatype:jackson-datatype-joda:2.9.10
+[info]     | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | +-com.fasterxml.jackson.core:jackson-annotations:2.9.10 (evicted..
+[info]     | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | +-com.fasterxml.jackson.core:jackson-core:2.9.10 (evicted by: 2...
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | 
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.9.10 (evicted by..
+[info]     | +-joda-time:joda-time:2.7 (evicted by: 2.9.7)
+[info]     | +-joda-time:joda-time:2.9.7
+[info]     | 
+[info]     +-com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.1
+[info]     | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     |   +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     |   +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     |   
+[info]     +-com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.10 (e..
+[info]     +-com.github.jknack:handlebars-jackson2:4.1.2
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | 
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.9.7 (evicted by:..
+[info]     | +-com.github.jknack:handlebars:4.1.2
+[info]     |   +-org.slf4j:slf4j-api:1.7.25 (evicted by: 1.7.28)
+[info]     |   +-org.slf4j:slf4j-api:1.7.28
+[info]     |   
+[info]     +-com.github.jknack:handlebars:4.1.2
+[info]     | +-org.slf4j:slf4j-api:1.7.25 (evicted by: 1.7.28)
+[info]     | +-org.slf4j:slf4j-api:1.7.28
+[info]     | 
+[info]     +-com.github.joschi.jackson:jackson-datatype-threetenbp:2.9.10
+[info]     | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | +-com.fasterxml.jackson.core:jackson-core:2.9.10 (evicted by: 2...
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | 
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.9.10 (evicted by..
+[info]     | +-org.threeten:threetenbp:1.4.0
+[info]     | 
+[info]     +-com.github.mifmif:generex:1.0.2
+[info]     | +-dk.brics.automaton:automaton:1.11-8
+[info]     | 
+[info]     +-com.google.guava:guava:26.0-jre (evicted by: 27.0.1-android)
+[info]     +-com.google.guava:guava:27.0.1-android
+[info]     | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     | +-com.google.guava:failureaccess:1.0.1
+[info]     | +-com.google.guava:listenablefuture:9999.0-empty-to-avoid-confli..
+[info]     | +-com.google.j2objc:j2objc-annotations:1.1
+[info]     | +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     | +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     | 
+[info]     +-com.samskivert:jmustache:1.14
+[info]     +-commons-cli:commons-cli:1.2
+[info]     +-commons-io:commons-io:2.4
+[info]     +-io.swagger.core.v3:swagger-core:2.0.10 (evicted by: 2.1.0)
+[info]     +-io.swagger.core.v3:swagger-core:2.1.0
+[info]     | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | 
+[info]     | +-com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | +-org.yaml:snakeyaml:1.24
+[info]     | | 
+[info]     | +-com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | |   +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | |   +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | |   
+[info]     | +-io.swagger.core.v3:swagger-annotations:2.1.0
+[info]     | +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | 
+[info]     | +-javax.validation:validation-api:1.1.0.Final
+[info]     | +-javax.xml.bind:jaxb-api:2.3.0
+[info]     | +-org.apache.commons:commons-lang3:3.7
+[info]     | +-org.slf4j:slf4j-api:1.7.25 (evicted by: 1.7.28)
+[info]     | +-org.slf4j:slf4j-api:1.7.28
+[info]     | 
+[info]     +-io.swagger.parser.v3:swagger-parser:2.0.16
+[info]     | +-commons-io:commons-io:2.4
+[info]     | +-io.swagger.parser.v3:swagger-parser-v2-converter:2.0.16
+[info]     | | +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | 
+[info]     | | +-io.swagger.parser.v3:swagger-parser-core:2.0.16
+[info]     | | | +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | | |   +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | |   
+[info]     | | +-io.swagger.parser.v3:swagger-parser-v3:2.0.16
+[info]     | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | 
+[info]     | | | +-com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2..
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | +-org.yaml:snakeyaml:1.24
+[info]     | | | | 
+[info]     | | | +-commons-io:commons-io:2.4
+[info]     | | | +-io.swagger.core.v3:swagger-core:2.1.0
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | 
+[info]     | | | | +-com.fasterxml.jackson.dataformat:jackson-dataformat-yaml..
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | +-org.yaml:snakeyaml:1.24
+[info]     | | | | | 
+[info]     | | | | +-com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2..
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | | |   +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | |   +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | |   
+[info]     | | | | +-io.swagger.core.v3:swagger-annotations:2.1.0
+[info]     | | | | +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | 
+[info]     | | | | +-javax.validation:validation-api:1.1.0.Final
+[info]     | | | | +-javax.xml.bind:jaxb-api:2.3.0
+[info]     | | | | +-org.apache.commons:commons-lang3:3.7
+[info]     | | | | +-org.slf4j:slf4j-api:1.7.25 (evicted by: 1.7.28)
+[info]     | | | | +-org.slf4j:slf4j-api:1.7.28
+[info]     | | | | 
+[info]     | | | +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | 
+[info]     | | | +-io.swagger.parser.v3:swagger-parser-core:2.0.16
+[info]     | | |   +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | | |     +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | |     
+[info]     | | +-io.swagger:swagger-compat-spec-parser:1.0.48
+[info]     | | | +-com.github.fge:json-patch:1.6
+[info]     | | | | +-com.github.fge:jackson-coreutils:1.6 (evicted by: 1.8)
+[info]     | | | | +-com.github.fge:jackson-coreutils:1.8
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | | 
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-databind:2.2.3 (evi..
+[info]     | | | | | +-com.github.fge:msg-simple:1.1
+[info]     | | | | | | +-com.github.fge:btf:1.2
+[info]     | | | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by:..
+[info]     | | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | | 
+[info]     | | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by: 3..
+[info]     | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | 
+[info]     | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by: 3.0..
+[info]     | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | +-com.google.guava:guava:16.0.1 (evicted by: 27.0.1-andr..
+[info]     | | | | | +-com.google.guava:guava:27.0.1-android
+[info]     | | | | |   +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | |   +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     | | | | |   +-com.google.guava:failureaccess:1.0.1
+[info]     | | | | |   +-com.google.guava:listenablefuture:9999.0-empty-to-av..
+[info]     | | | | |   +-com.google.j2objc:j2objc-annotations:1.1
+[info]     | | | | |   +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     | | | | |   +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     | | | | |   
+[info]     | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by: 3.0.2)
+[info]     | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | 
+[info]     | | | +-com.github.java-json-tools:json-schema-validator:2.2.8
+[info]     | | | | +-com.github.java-json-tools:json-schema-core:1.2.8
+[info]     | | | | | +-com.github.fge:jackson-coreutils:1.8
+[info]     | | | | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.1..
+[info]     | | | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | | | 
+[info]     | | | | | | +-com.fasterxml.jackson.core:jackson-databind:2.2.3 (e..
+[info]     | | | | | | +-com.github.fge:msg-simple:1.1
+[info]     | | | | | | | +-com.github.fge:btf:1.2
+[info]     | | | | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted b..
+[info]     | | | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | | | 
+[info]     | | | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by:..
+[info]     | | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | | 
+[info]     | | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by: 3..
+[info]     | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | +-com.google.guava:guava:16.0.1 (evicted by: 27.0.1-an..
+[info]     | | | | | | +-com.google.guava:guava:27.0.1-android
+[info]     | | | | | |   +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | |   +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     | | | | | |   +-com.google.guava:failureaccess:1.0.1
+[info]     | | | | | |   +-com.google.guava:listenablefuture:9999.0-empty-to-..
+[info]     | | | | | |   +-com.google.j2objc:j2objc-annotations:1.1
+[info]     | | | | | |   +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     | | | | | |   +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     | | | | | |   
+[info]     | | | | | +-com.github.fge:uri-template:0.9
+[info]     | | | | | | +-com.github.fge:msg-simple:1.1
+[info]     | | | | | | | +-com.github.fge:btf:1.2
+[info]     | | | | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted b..
+[info]     | | | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | | | 
+[info]     | | | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by:..
+[info]     | | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | | 
+[info]     | | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by: 3..
+[info]     | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | +-com.google.guava:guava:16.0.1 (evicted by: 27.0.1-an..
+[info]     | | | | | | +-com.google.guava:guava:27.0.1-android
+[info]     | | | | | |   +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | |   +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     | | | | | |   +-com.google.guava:failureaccess:1.0.1
+[info]     | | | | | |   +-com.google.guava:listenablefuture:9999.0-empty-to-..
+[info]     | | | | | |   +-com.google.j2objc:j2objc-annotations:1.1
+[info]     | | | | | |   +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     | | | | | |   +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     | | | | | |   
+[info]     | | | | | +-com.google.code.findbugs:jsr305:2.0.1 (evicted by: 3.0..
+[info]     | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | +-org.mozilla:rhino:1.7R4
+[info]     | | | | | 
+[info]     | | | | +-com.google.code.findbugs:jsr305:3.0.1 (evicted by: 3.0.2)
+[info]     | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | +-com.googlecode.libphonenumber:libphonenumber:8.0.0
+[info]     | | | | +-javax.mail:mailapi:1.4.3
+[info]     | | | | | +-javax.activation:activation:1.1
+[info]     | | | | | 
+[info]     | | | | +-joda-time:joda-time:2.9.7
+[info]     | | | | +-net.sf.jopt-simple:jopt-simple:5.0.3
+[info]     | | | | 
+[info]     | | | +-io.swagger:swagger-core:1.6.0
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | 
+[info]     | | | | +-com.fasterxml.jackson.dataformat:jackson-dataformat-yaml..
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | +-org.yaml:snakeyaml:1.24
+[info]     | | | | | 
+[info]     | | | | +-com.google.guava:guava:27.0.1-android
+[info]     | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     | | | | | +-com.google.guava:failureaccess:1.0.1
+[info]     | | | | | +-com.google.guava:listenablefuture:9999.0-empty-to-avoi..
+[info]     | | | | | +-com.google.j2objc:j2objc-annotations:1.1
+[info]     | | | | | +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     | | | | | +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     | | | | | 
+[info]     | | | | +-io.swagger:swagger-models:1.6.0
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | +-io.swagger:swagger-annotations:1.6.0
+[info]     | | | | | +-org.slf4j:slf4j-api:1.7.22 (evicted by: 1.7.28)
+[info]     | | | | | +-org.slf4j:slf4j-api:1.7.28
+[info]     | | | | | 
+[info]     | | | | +-javax.validation:validation-api:1.1.0.Final
+[info]     | | | | +-org.apache.commons:commons-lang3:3.2.1 (evicted by: 3.7)
+[info]     | | | | +-org.apache.commons:commons-lang3:3.7
+[info]     | | | | +-org.slf4j:slf4j-api:1.7.22 (evicted by: 1.7.28)
+[info]     | | | | +-org.slf4j:slf4j-api:1.7.28
+[info]     | | | | 
+[info]     | | | +-io.swagger:swagger-parser:1.0.48
+[info]     | | | | +-commons-io:commons-io:2.4
+[info]     | | | | +-io.swagger:swagger-core:1.6.0
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | | 
+[info]     | | | | | +-com.fasterxml.jackson.dataformat:jackson-dataformat-ya..
+[info]     | | | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | | | +-org.yaml:snakeyaml:1.24
+[info]     | | | | | | 
+[info]     | | | | | +-com.google.guava:guava:27.0.1-android
+[info]     | | | | | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | | | | | +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     | | | | | | +-com.google.guava:failureaccess:1.0.1
+[info]     | | | | | | +-com.google.guava:listenablefuture:9999.0-empty-to-av..
+[info]     | | | | | | +-com.google.j2objc:j2objc-annotations:1.1
+[info]     | | | | | | +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     | | | | | | +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     | | | | | | 
+[info]     | | | | | +-io.swagger:swagger-models:1.6.0
+[info]     | | | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | | | +-io.swagger:swagger-annotations:1.6.0
+[info]     | | | | | | +-org.slf4j:slf4j-api:1.7.22 (evicted by: 1.7.28)
+[info]     | | | | | | +-org.slf4j:slf4j-api:1.7.28
+[info]     | | | | | | 
+[info]     | | | | | +-javax.validation:validation-api:1.1.0.Final
+[info]     | | | | | +-org.apache.commons:commons-lang3:3.2.1 (evicted by: 3.7)
+[info]     | | | | | +-org.apache.commons:commons-lang3:3.7
+[info]     | | | | | +-org.slf4j:slf4j-api:1.7.22 (evicted by: 1.7.28)
+[info]     | | | | | +-org.slf4j:slf4j-api:1.7.28
+[info]     | | | | | 
+[info]     | | | | +-org.slf4j:slf4j-api:1.7.28
+[info]     | | | | +-org.slf4j:slf4j-ext:1.7.28
+[info]     | | | |   +-org.slf4j:slf4j-api:1.7.28
+[info]     | | | |   
+[info]     | | | +-org.apache.httpcomponents:httpclient:4.5.2
+[info]     | | |   +-commons-codec:commons-codec:1.9
+[info]     | | |   +-commons-logging:commons-logging:1.2
+[info]     | | |   +-org.apache.httpcomponents:httpcore:4.4.4
+[info]     | | |   
+[info]     | | +-io.swagger:swagger-parser:1.0.48
+[info]     | |   +-commons-io:commons-io:2.4
+[info]     | |   +-io.swagger:swagger-core:1.6.0
+[info]     | |   | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | |   | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | |   | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | |   | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | |   | | 
+[info]     | |   | +-com.fasterxml.jackson.dataformat:jackson-dataformat-yaml..
+[info]     | |   | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | |   | | +-org.yaml:snakeyaml:1.24
+[info]     | |   | | 
+[info]     | |   | +-com.google.guava:guava:27.0.1-android
+[info]     | |   | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | |   | | +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     | |   | | +-com.google.guava:failureaccess:1.0.1
+[info]     | |   | | +-com.google.guava:listenablefuture:9999.0-empty-to-avoi..
+[info]     | |   | | +-com.google.j2objc:j2objc-annotations:1.1
+[info]     | |   | | +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     | |   | | +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     | |   | | 
+[info]     | |   | +-io.swagger:swagger-models:1.6.0
+[info]     | |   | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | |   | | +-io.swagger:swagger-annotations:1.6.0
+[info]     | |   | | +-org.slf4j:slf4j-api:1.7.22 (evicted by: 1.7.28)
+[info]     | |   | | +-org.slf4j:slf4j-api:1.7.28
+[info]     | |   | | 
+[info]     | |   | +-javax.validation:validation-api:1.1.0.Final
+[info]     | |   | +-org.apache.commons:commons-lang3:3.2.1 (evicted by: 3.7)
+[info]     | |   | +-org.apache.commons:commons-lang3:3.7
+[info]     | |   | +-org.slf4j:slf4j-api:1.7.22 (evicted by: 1.7.28)
+[info]     | |   | +-org.slf4j:slf4j-api:1.7.28
+[info]     | |   | 
+[info]     | |   +-org.slf4j:slf4j-api:1.7.28
+[info]     | |   +-org.slf4j:slf4j-ext:1.7.28
+[info]     | |     +-org.slf4j:slf4j-api:1.7.28
+[info]     | |     
+[info]     | +-io.swagger.parser.v3:swagger-parser-v3:2.0.16
+[info]     | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | 
+[info]     | | +-com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.1..
+[info]     | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | +-org.yaml:snakeyaml:1.24
+[info]     | | | 
+[info]     | | +-commons-io:commons-io:2.4
+[info]     | | +-io.swagger.core.v3:swagger-core:2.1.0
+[info]     | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | 
+[info]     | | | +-com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2..
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | +-org.yaml:snakeyaml:1.24
+[info]     | | | | 
+[info]     | | | +-com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.1..
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-databind:2.10.1
+[info]     | | | |   +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | |   +-com.fasterxml.jackson.core:jackson-core:2.10.1
+[info]     | | | |   
+[info]     | | | +-io.swagger.core.v3:swagger-annotations:2.1.0
+[info]     | | | +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | | 
+[info]     | | | +-javax.validation:validation-api:1.1.0.Final
+[info]     | | | +-javax.xml.bind:jaxb-api:2.3.0
+[info]     | | | +-org.apache.commons:commons-lang3:3.7
+[info]     | | | +-org.slf4j:slf4j-api:1.7.25 (evicted by: 1.7.28)
+[info]     | | | +-org.slf4j:slf4j-api:1.7.28
+[info]     | | | 
+[info]     | | +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | | | +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | | | 
+[info]     | | +-io.swagger.parser.v3:swagger-parser-core:2.0.16
+[info]     | |   +-io.swagger.core.v3:swagger-models:2.1.0
+[info]     | |     +-com.fasterxml.jackson.core:jackson-annotations:2.10.1
+[info]     | |     
+[info]     | +-org.slf4j:slf4j-api:1.7.28
+[info]     | +-org.slf4j:slf4j-ext:1.7.28
+[info]     |   +-org.slf4j:slf4j-api:1.7.28
+[info]     |   
+[info]     +-net.java.dev.jna:jna:5.5.0
+[info]     +-org.apache.commons:commons-lang3:3.4 (evicted by: 3.7)
+[info]     +-org.apache.commons:commons-lang3:3.7
+[info]     +-org.openapitools:openapi-generator-core:4.2.2
+[info]     | +-com.google.guava:guava:26.0-jre (evicted by: 27.0.1-android)
+[info]     | +-com.google.guava:guava:27.0.1-android
+[info]     | | +-com.google.code.findbugs:jsr305:3.0.2
+[info]     | | +-com.google.errorprone:error_prone_annotations:2.2.0
+[info]     | | +-com.google.guava:failureaccess:1.0.1
+[info]     | | +-com.google.guava:listenablefuture:9999.0-empty-to-avoid-conf..
+[info]     | | +-com.google.j2objc:j2objc-annotations:1.1
+[info]     | | +-org.checkerframework:checker-compat-qual:2.5.2
+[info]     | | +-org.codehaus.mojo:animal-sniffer-annotations:1.17
+[info]     | | 
+[info]     | +-org.slf4j:slf4j-api:1.7.12 (evicted by: 1.7.28)
+[info]     | +-org.slf4j:slf4j-api:1.7.28
+[info]     | 
+[info]     +-org.slf4j:slf4j-api:1.7.12 (evicted by: 1.7.28)
+[info]     +-org.slf4j:slf4j-api:1.7.28
+[info]     +-org.slf4j:slf4j-ext:1.7.12 (evicted by: 1.7.28)
+[info]     +-org.slf4j:slf4j-ext:1.7.28
+[info]       +-org.slf4j:slf4j-api:1.7.28
+[info]       
+[success] Total time: 8 s, completed Dec 24, 2019, 7:20:11 PM
