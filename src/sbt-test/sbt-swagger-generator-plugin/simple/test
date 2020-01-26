@@ -1,2 +1,2 @@
 > generateSwagger
-$ exists target/zip/scala-2.12.zip
+$ exists target/swagger/README.md

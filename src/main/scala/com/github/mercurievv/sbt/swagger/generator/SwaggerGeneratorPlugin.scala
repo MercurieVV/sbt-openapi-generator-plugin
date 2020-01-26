@@ -22,67 +22,70 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
   )
    */
 
-  object autoImport {
+  trait PluginKeys {
 
-    val inputFile = settingKey[File]("inputFile")
-    val output    = settingKey[File]("output")
-    val config    = settingKey[File]("config")
-    val generateSwagger   = taskKey[Unit]("Generates files which includes all files from generator")
+    lazy val inputFile       = settingKey[File]("inputFile")
+    lazy val output          = settingKey[File]("output")
+    lazy val config          = settingKey[File]("config")
+    lazy val generateSwagger = taskKey[Unit]("Generates files which includes all files from generator")
 
-/*
-    val language                   = settingKey[String]("language")
-    val auth                       = settingKey[String]("auth")
-    val additionalProperties       = settingKey[Map[String, String]]("additionalProperties")
-    val apiPackage                 = settingKey[String]("apiPackage")
-    val artifactVersion            = settingKey[String]("artifactVersion")
-    val gitRepoId                  = settingKey[String]("gitRepoId")
-    val gitUserId                  = settingKey[String]("gitUserId")
-    val httpUserAgent              = settingKey[String]("httpUserAgent")
-    val ignoreFileOverride         = settingKey[String]("ignoreFileOverride")
-    val importMappings             = settingKey[Map[String, String]]("importMappings")
-    val instantiationTypes         = settingKey[String]("instantiationTypes")
-    val invokerPackage             = settingKey[String]("invokerPackage")
-    val languageSpecificPrimitives = settingKey[String]("languageSpecificPrimitives")
-    val library                    = settingKey[String]("library")
-    val modelNamePrefix            = settingKey[String]("modelNamePrefix")
-    val modelNameSuffix            = settingKey[String]("modelNameSuffix")
-    val modelPackage               = settingKey[String]("modelPackage")
-    val releaseNote                = settingKey[String]("releaseNote")
-    val reservedWordsMappings      = settingKey[String]("reservedWordsMappings")
-    val skipOverwrite              = settingKey[String]("skipOverwrite")
-    val templateDir                = settingKey[String]("templateDir")
-    val typeMappings               = settingKey[String]("typeMappings")
-    val verbose                    = settingKey[String]("verbose")
+    lazy val language                   = settingKey[String]("language")
+    lazy val auth                       = settingKey[String]("auth")
+    lazy val additionalProperties       = settingKey[Map[String, String]]("additionalProperties")
+    lazy val apiPackage                 = settingKey[String]("apiPackage")
+    lazy val artifactVersion            = settingKey[String]("artifactVersion")
+    lazy val gitRepoId                  = settingKey[String]("gitRepoId")
+    lazy val gitUserId                  = settingKey[String]("gitUserId")
+    lazy val httpUserAgent              = settingKey[String]("httpUserAgent")
+    lazy val ignoreFileOverride         = settingKey[String]("ignoreFileOverride")
+    lazy val importMappings             = settingKey[Map[String, String]]("importMappings")
+    lazy val instantiationTypes         = settingKey[String]("instantiationTypes")
+    lazy val invokerPackage             = settingKey[String]("invokerPackage")
+    lazy val languageSpecificPrimitives = settingKey[String]("languageSpecificPrimitives")
+    lazy val library                    = settingKey[String]("library")
+    lazy val modelNamePrefix            = settingKey[String]("modelNamePrefix")
+    lazy val modelNameSuffix            = settingKey[String]("modelNameSuffix")
+    lazy val modelPackage               = settingKey[String]("modelPackage")
+    lazy val releaseNote                = settingKey[String]("releaseNote")
+    lazy val reservedWordsMappings      = settingKey[String]("reservedWordsMappings")
+    lazy val skipOverwrite              = settingKey[String]("skipOverwrite")
+    lazy val templateDir                = settingKey[String]("templateDir")
+    lazy val typeMappings               = settingKey[String]("typeMappings")
+    lazy val verbose                    = settingKey[String]("verbose")
 
-    val swaggerClean   = taskKey[Unit]("Clean swagger generated packages")
-    val swaggerCodeGen = taskKey[Seq[File]]("Generate code/documentation with swagger")
+    lazy val swaggerClean   = taskKey[Unit]("Clean swagger generated packages")
+    lazy val swaggerCodeGen = taskKey[Seq[File]]("Generate code/documentation with swagger")
 
-    val swaggerModelCodeGen = taskKey[Seq[File]]("Generate swagger models and JSON converters")
+    lazy val swaggerModelCodeGen = taskKey[Seq[File]]("Generate swagger models and JSON converters")
 
-    val swaggerClientCodeGen = taskKey[Seq[File]]("Generate swagger client class with WS calls to specific routes")
-*/
+    lazy val swaggerClientCodeGen = taskKey[Seq[File]]("Generate swagger client class with WS calls to specific routes")
   }
+  object autoImport extends PluginKeys
 
   import autoImport._
   override val requires: Plugins = plugins.JvmPlugin
   override def trigger           = noTrigger
 
-  override lazy val buildSettings = Seq(
-//    greeting := "Hi!",
-    generateSwagger := generateSwaggerTask.value,
-      inputFile := new File(""),
-      output := new File("")
+  override lazy val projectSettings = Seq(
+      generateSwagger := generateSwaggerTask.value,
+      inputFile := new File("swagger.yaml"),
+      output := target.value / "swagger"
   )
 
   lazy val generateSwaggerTask =
     Def.task {
       val gen: Generator = new DefaultGenerator()
-      val input          = new ClientOptInput().openAPI(new OpenAPI())
-      val clientOptInput = new CodegenConfigurator().setInputSpec(inputFile.value.getPath).toClientOptInput
+      val clientOptInput = new CodegenConfigurator()
+        .setInputSpec(inputFile.value.getPath)
+        .setOutputDir(output.value.getPath)
+        .setGeneratorName(language.value)
+        .toClientOptInput
       gen.opts(clientOptInput)
-      gen.generate()
-      new File(output.value, ".")
-//      println("aaa")
-//      new File(".")
+      try {
+        gen.generate()
+      } catch {
+        case throwable: Throwable => throwable.printStackTrace()
+      }
+      output.value
     }
 }
