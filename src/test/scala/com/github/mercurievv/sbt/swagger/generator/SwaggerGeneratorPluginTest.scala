@@ -18,7 +18,7 @@ class SwaggerGeneratorPluginTest extends org.scalatest.FunSuite {
     val gen: Generator = new DefaultGenerator()
     val input          = new ClientOptInput().openAPI(new OpenAPI())
     val clientOptInput = new CodegenConfigurator()
-      .setInputSpec(new File("swagger.yaml").getPath)
+      .setInputSpec(new File("src/sbt-test/sbt-swagger-generator-plugin/simple/swagger.yaml").getPath)
       .setOutputDir(new File("swout").getPath)
       .setGeneratorName("kotlin")
       .toClientOptInput
