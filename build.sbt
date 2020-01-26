@@ -5,6 +5,7 @@ lazy val root = (project in file("."))
     organization := "com.github.mercurievv",
     version := "0.0.1-SNAPSHOT",
     sbtPlugin := true,
+    publishMavenStyle := true,
     scriptedLaunchOpts += ("-Dplugin.version=" + version.value),
     scriptedLaunchOpts ++= sys.process.javaVmArguments.filter(
       a => Seq("-Xmx", "-Xms", "-XX", "-      Dsbt.log.noformat").exists(a.startsWith)
