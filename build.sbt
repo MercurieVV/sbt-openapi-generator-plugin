@@ -1,7 +1,7 @@
 lazy val root = (project in file("."))
   .enablePlugins(SbtPlugin)
   .settings(
-    name := "sbt-swagger-generator-plugin",
+    name := "sbt-openapi-generator-plugin",
     organization := "com.github.mercurievv",
     version := "0.0.1-SNAPSHOT",
     sbtPlugin := true,
