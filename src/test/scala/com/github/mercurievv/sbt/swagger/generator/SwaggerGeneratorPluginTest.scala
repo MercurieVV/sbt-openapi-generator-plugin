@@ -1,5 +1,6 @@
 package com.github.mercurievv.sbt.swagger.generator
 
+import com.github.mercurievv.sbt.swagger.generator.SwaggerGeneratorPlugin.CustomClassloadingCodegenConfigurator
 import com.github.mercurievv.sbt.swagger.generator.SwaggerGeneratorPlugin.autoImport.{inputFile, language, output}
 import io.swagger.v3.oas.models.OpenAPI
 import org.openapitools.codegen.{ClientOptInput, DefaultGenerator, Generator}
@@ -16,8 +17,7 @@ import sbt.File
 class SwaggerGeneratorPluginTest extends org.scalatest.FunSuite {
   test("run generation"){
     val gen: Generator = new DefaultGenerator()
-    val input          = new ClientOptInput().openAPI(new OpenAPI())
-    val clientOptInput = new CodegenConfigurator()
+    val clientOptInput = new CustomClassloadingCodegenConfigurator()
       .setInputSpec(new File("src/sbt-test/sbt-swagger-generator-plugin/simple/swagger.yaml").getPath)
       .setOutputDir(new File("swout").getPath)
       .setGeneratorName("kotlin")

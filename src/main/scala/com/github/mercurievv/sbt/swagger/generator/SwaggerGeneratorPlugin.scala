@@ -1,11 +1,16 @@
 package com.github.mercurievv.sbt.swagger.generator
 
+import java.util
+import java.util.{Map, ServiceLoader}
+
 import sbt._
 import Keys._
-import org.openapitools.codegen.{ClientOptInput, DefaultGenerator, Generator}
+import org.openapitools.codegen.{ClientOptInput, CodegenConfig, CodegenConfigLoader, CodegenConstants, DefaultGenerator, Generator, GeneratorNotFoundException, TemplatingEngineLoader}
 import _root_.io.swagger.v3.oas.models.OpenAPI
 import com.github.mercurievv.sbt.swagger.generator.SwaggerGeneratorPlugin.autoImport.inputFile
-import org.openapitools.codegen.config.CodegenConfigurator
+import org.apache.commons.lang3.StringUtils.isNotEmpty
+import org.openapitools.codegen.api.TemplatingEngineAdapter
+import org.openapitools.codegen.config.{CodegenConfigurator, Context, GeneratorSettings, WorkflowSettings}
 
 /**
   * Created with IntelliJ IDEA.
@@ -75,7 +80,91 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
   lazy val generateSwaggerTask =
     Def.task {
       val gen: Generator = new DefaultGenerator()
-      val clientOptInput = new CodegenConfigurator()
+      val clientOptInput = new CodegenConfigurator() {
+        import org.apache.commons.lang3.StringUtils.isNotEmpty
+        import org.openapitools.codegen.api.TemplatingEngineAdapter
+        import org.openapitools.codegen.config.{CodegenConfigurator, Context, GeneratorSettings, WorkflowSettings}
+        override def toClientOptInput: ClientOptInput = {
+          val context: Context[_]                  = toContext
+          val workflowSettings: WorkflowSettings   = context.getWorkflowSettings
+          val generatorSettings: GeneratorSettings = context.getGeneratorSettings
+          // We load the config via generatorSettings.getGeneratorName() because this is guaranteed to be set
+          // regardless of entrypoint (CLI sets properties on this type, config deserialization sets on generatorSettings).
+          val config: CodegenConfig = forName(generatorSettings.getGeneratorName, classOf[CodegenConfig])
+          if (isNotEmpty(generatorSettings.getLibrary)) config.setLibrary(generatorSettings.getLibrary)
+          // TODO: Work toward CodegenConfig having a "WorkflowSettings" property, or better a "Workflow" object which itself has a "WorkflowSettings" property.
+          config.setInputSpec(workflowSettings.getInputSpec)
+          config.setOutputDir(workflowSettings.getOutputDir)
+          config.setSkipOverwrite(workflowSettings.isSkipOverwrite)
+          config.setIgnoreFilePathOverride(workflowSettings.getIgnoreFileOverride)
+          config.setRemoveOperationIdPrefix(workflowSettings.isRemoveOperationIdPrefix)
+          config.setEnablePostProcessFile(workflowSettings.isEnablePostProcessFile)
+          config.setEnableMinimalUpdate(workflowSettings.isEnableMinimalUpdate)
+          config.setStrictSpecBehavior(workflowSettings.isStrictSpecBehavior)
+          val templatingEngine: TemplatingEngineAdapter = TemplatingEngineLoader.byIdentifier(workflowSettings.getTemplatingEngineName)
+          config.setTemplatingEngine(templatingEngine)
+          // TODO: Work toward CodegenConfig having a "GeneratorSettings" property.
+          config.instantiationTypes.putAll(generatorSettings.getInstantiationTypes)
+          config.typeMapping.putAll(generatorSettings.getTypeMappings)
+          config.importMapping.putAll(generatorSettings.getImportMappings)
+          config.languageSpecificPrimitives.addAll(generatorSettings.getLanguageSpecificPrimitives)
+          config.reservedWordsMappings.putAll(generatorSettings.getReservedWordMappings)
+          config.additionalProperties.putAll(generatorSettings.getAdditionalProperties)
+          val serverVariables: util.Map[String, String] = generatorSettings.getServerVariables
+          if (!serverVariables.isEmpty) { // This is currently experimental due to vagueness in the specification
+            //            LOGGER.warn("user-defined server variable support is experimental.")
+            config.serverVariableOverrides.putAll(serverVariables)
+          }
+          // any other additional properties?
+          val templateDir: String = workflowSettings.getTemplateDir
+          if (templateDir != null) config.additionalProperties.put(CodegenConstants.TEMPLATE_DIR, workflowSettings.getTemplateDir)
+          val input: ClientOptInput = new ClientOptInput().config(config)
+          input.openAPI(context.getSpecDocument.asInstanceOf[OpenAPI])
+        }
+
+        def forName(name: String, aClass: Class[CodegenConfig]): CodegenConfig = {
+          println(name)
+          import scala.collection.JavaConverters._
+          val services = ServiceLoader.load(aClass, aClass.getClassLoader).asScala
+          val superclassServices = ServiceLoader.load(aClass, cloader).asScala
+          val configsFound = (services ++ superclassServices).toSet
+          configsFound.find(_.getName == name)
+            .orElse(Option(cloader.loadClass(name).newInstance().asInstanceOf[CodegenConfig]))
+            .orElse(Option(Class.forName(name).getDeclaredConstructor().newInstance().asInstanceOf[CodegenConfig])) match {
+            case None => throw new GeneratorNotFoundException("Can't load config class with name '".concat(name) + "'\nAvailable:\n" + configsFound.mkString("\n"))
+            case Some(value) => value
+          }
+
+
+          // else try to load directly
+          /*
+                try {
+                  // Try the context classloader first. But, during macro compilation, it's probably wrong, so fallback to this
+                  // classloader.
+                  Some(Thread.currentThread().getContextClassLoader.loadClass(name))
+                } catch {
+                  case _: ClassNotFoundException => super.loadClass(name)
+                }
+                try Class.forName(name).getDeclaredConstructor().newInstance().asInstanceOf[CodegenConfig]
+                catch {
+                  case e: Exception =>
+                    throw new GeneratorNotFoundException("Can't load config class with name '".concat(name) + "'\nAvailable:\n" + availableConfigs.toString, e)
+                }
+          */
+        }
+
+        val cloader = new ClassLoader(this.getClass.getClassLoader) {
+          override def loadClass(name: String): Class[_] = {
+            try {
+              // Try the context classloader first. But, during macro compilation, it's probably wrong, so fallback to this
+              // classloader.
+              Thread.currentThread().getContextClassLoader.loadClass(name)
+            } catch {
+              case e: ClassNotFoundException => super.loadClass(name)
+            }
+          }
+        }
+      }
         .setInputSpec(inputFile.value.getPath)
         .setOutputDir(output.value.getPath)
         .setGeneratorName(language.value)
@@ -88,4 +177,90 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
       }
       output.value
     }
+
+  class CustomClassloadingCodegenConfigurator extends CodegenConfigurator {
+    import org.apache.commons.lang3.StringUtils.isNotEmpty
+    import org.openapitools.codegen.api.TemplatingEngineAdapter
+    import org.openapitools.codegen.config.{CodegenConfigurator, Context, GeneratorSettings, WorkflowSettings}
+    override def toClientOptInput: ClientOptInput = {
+      val context: Context[_]                  = toContext
+      val workflowSettings: WorkflowSettings   = context.getWorkflowSettings
+      val generatorSettings: GeneratorSettings = context.getGeneratorSettings
+      // We load the config via generatorSettings.getGeneratorName() because this is guaranteed to be set
+      // regardless of entrypoint (CLI sets properties on this type, config deserialization sets on generatorSettings).
+      val config: CodegenConfig = forName(generatorSettings.getGeneratorName, classOf[CodegenConfig])
+      if (isNotEmpty(generatorSettings.getLibrary)) config.setLibrary(generatorSettings.getLibrary)
+      // TODO: Work toward CodegenConfig having a "WorkflowSettings" property, or better a "Workflow" object which itself has a "WorkflowSettings" property.
+      config.setInputSpec(workflowSettings.getInputSpec)
+      config.setOutputDir(workflowSettings.getOutputDir)
+      config.setSkipOverwrite(workflowSettings.isSkipOverwrite)
+      config.setIgnoreFilePathOverride(workflowSettings.getIgnoreFileOverride)
+      config.setRemoveOperationIdPrefix(workflowSettings.isRemoveOperationIdPrefix)
+      config.setEnablePostProcessFile(workflowSettings.isEnablePostProcessFile)
+      config.setEnableMinimalUpdate(workflowSettings.isEnableMinimalUpdate)
+      config.setStrictSpecBehavior(workflowSettings.isStrictSpecBehavior)
+      val templatingEngine: TemplatingEngineAdapter = TemplatingEngineLoader.byIdentifier(workflowSettings.getTemplatingEngineName)
+      config.setTemplatingEngine(templatingEngine)
+      // TODO: Work toward CodegenConfig having a "GeneratorSettings" property.
+      config.instantiationTypes.putAll(generatorSettings.getInstantiationTypes)
+      config.typeMapping.putAll(generatorSettings.getTypeMappings)
+      config.importMapping.putAll(generatorSettings.getImportMappings)
+      config.languageSpecificPrimitives.addAll(generatorSettings.getLanguageSpecificPrimitives)
+      config.reservedWordsMappings.putAll(generatorSettings.getReservedWordMappings)
+      config.additionalProperties.putAll(generatorSettings.getAdditionalProperties)
+      val serverVariables: util.Map[String, String] = generatorSettings.getServerVariables
+      if (!serverVariables.isEmpty) { // This is currently experimental due to vagueness in the specification
+        //            LOGGER.warn("user-defined server variable support is experimental.")
+        config.serverVariableOverrides.putAll(serverVariables)
+      }
+      // any other additional properties?
+      val templateDir: String = workflowSettings.getTemplateDir
+      if (templateDir != null) config.additionalProperties.put(CodegenConstants.TEMPLATE_DIR, workflowSettings.getTemplateDir)
+      val input: ClientOptInput = new ClientOptInput().config(config)
+      input.openAPI(context.getSpecDocument.asInstanceOf[OpenAPI])
+    }
+
+    def forName(name: String, aClass: Class[CodegenConfig]): CodegenConfig = {
+      println(name)
+      import scala.collection.JavaConverters._
+      val services = ServiceLoader.load(aClass, aClass.getClassLoader).asScala
+      val superclassServices = ServiceLoader.load(aClass, cloader).asScala
+      val configsFound = (services ++ superclassServices).toSet
+      configsFound.find(_.getName == name)
+        .orElse(Option(cloader.loadClass(name).asInstanceOf[CodegenConfig]))
+        .orElse(Option(Class.forName(name).getDeclaredConstructor().newInstance().asInstanceOf[CodegenConfig])) match {
+        case None => throw new GeneratorNotFoundException("Can't load config class with name '".concat(name) + "'\nAvailable:\n" + configsFound.mkString("\n"))
+        case Some(value) => value
+      }
+
+
+      // else try to load directly
+/*
+      try {
+        // Try the context classloader first. But, during macro compilation, it's probably wrong, so fallback to this
+        // classloader.
+        Some(Thread.currentThread().getContextClassLoader.loadClass(name))
+      } catch {
+        case _: ClassNotFoundException => super.loadClass(name)
+      }
+      try Class.forName(name).getDeclaredConstructor().newInstance().asInstanceOf[CodegenConfig]
+      catch {
+        case e: Exception =>
+          throw new GeneratorNotFoundException("Can't load config class with name '".concat(name) + "'\nAvailable:\n" + availableConfigs.toString, e)
+      }
+*/
+    }
+
+  }
+  val cloader = new ClassLoader(this.getClass.getClassLoader) {
+    override def loadClass(name: String): Class[_] = {
+      try {
+        // Try the context classloader first. But, during macro compilation, it's probably wrong, so fallback to this
+        // classloader.
+        Thread.currentThread().getContextClassLoader.loadClass(name)
+      } catch {
+        case e: ClassNotFoundException => super.loadClass(name)
+      }
+    }
+  }
 }
