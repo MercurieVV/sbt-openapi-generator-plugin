@@ -1,4 +1,4 @@
-package com.github.mercurievv.sbt.openapi.codegen
+package com.github.mercurievv.sbt.openapi.generator.plugin
 
 import java.util
 import java.util.{Map, ServiceLoader}
