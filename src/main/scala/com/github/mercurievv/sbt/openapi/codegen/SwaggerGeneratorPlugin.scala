@@ -1,4 +1,4 @@
-package com.github.mercurievv.sbt.swagger.generator
+package com.github.mercurievv.sbt.openapi.codegen
 
 import java.util
 import java.util.{Map, ServiceLoader}
@@ -7,7 +7,7 @@ import sbt._
 import Keys._
 import org.openapitools.codegen.{ClientOptInput, CodegenConfig, CodegenConfigLoader, CodegenConstants, DefaultGenerator, Generator, GeneratorNotFoundException, TemplatingEngineLoader}
 import _root_.io.swagger.v3.oas.models.OpenAPI
-import com.github.mercurievv.sbt.swagger.generator.SwaggerGeneratorPlugin.autoImport.inputFile
+import SwaggerGeneratorPlugin.autoImport.inputFile
 import org.apache.commons.lang3.StringUtils.isNotEmpty
 import org.openapitools.codegen.api.TemplatingEngineAdapter
 import org.openapitools.codegen.config.{CodegenConfigurator, Context, GeneratorSettings, WorkflowSettings}

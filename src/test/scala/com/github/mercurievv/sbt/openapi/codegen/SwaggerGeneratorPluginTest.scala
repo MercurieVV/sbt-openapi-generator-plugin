@@ -1,7 +1,7 @@
-package com.github.mercurievv.sbt.swagger.generator
+package com.github.mercurievv.sbt.openapi.codegen
 
-import com.github.mercurievv.sbt.swagger.generator.SwaggerGeneratorPlugin.CustomClassloadingCodegenConfigurator
-import com.github.mercurievv.sbt.swagger.generator.SwaggerGeneratorPlugin.autoImport.{inputFile, language, output}
+import SwaggerGeneratorPlugin.CustomClassloadingCodegenConfigurator
+import SwaggerGeneratorPlugin.autoImport.{inputFile, language, output}
 import io.swagger.v3.oas.models.OpenAPI
 import org.openapitools.codegen.{ClientOptInput, DefaultGenerator, Generator}
 import org.openapitools.codegen.config.CodegenConfigurator
