@@ -13,13 +13,14 @@ lazy val root = (project in file("."))
     scriptedBufferLog := true,
 
     publishTo := {
+      println(sys.env("OSS_SONATYPE_LOGIN"))
       val nexus = "https://oss.sonatype.org/"
       if (isSnapshot.value)
         Some("snapshots" at nexus + "content/repositories/snapshots")
       else
         Some("releases"  at nexus + "service/local/staging/deploy/maven2")
     },
-    credentials := List(Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", sys.env.get("OSS_SONATYPE_LOGIN").get, sys.env.get("OSS_SONATYPE_PASSWORD").get))
+    credentials := List(Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", sys.env("OSS_SONATYPE_LOGIN"), sys.env("OSS_SONATYPE_PASSWORD")))
   )
 
 libraryDependencies += "org.openapitools" % "openapi-generator" % "4.2.2"
