@@ -13,8 +13,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Run tests, build and publish to sonatype
-      run: sbt test;build;publish
+    - name: Run: clean, tests, build and publish to sonatype
+      run: sbt clean;compile;test;publish
       env:  
         OSS_SONATYPE_LOGIN: ${{ secrets.OSS_SONATYPE_LOGIN }}
         OSS_SONATYPE_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
