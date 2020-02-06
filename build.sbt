@@ -19,7 +19,7 @@ lazy val root = (project in file("."))
       else
         Some("releases"  at nexus + "service/local/staging/deploy/maven2")
     },
-    credentials := List(Credentials(Path.userHome / ".sbt" / ".credentials"))
+    credentials := List(Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", sys.env.get("OSS_SONATYPE_LOGIN").get, sys.env.get("OSS_SONATYPE_PASSWORD").get))
   )
 
 libraryDependencies += "org.openapitools" % "openapi-generator" % "4.2.2"
