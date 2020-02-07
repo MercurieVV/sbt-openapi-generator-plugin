@@ -14,7 +14,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Run clean, tests, build and publish to sonatype
-      run: sbt clean;test;compile;publish
+      run: sbt publish
       env:  
         OSS_SONATYPE_LOGIN: ${{ secrets.OSS_SONATYPE_LOGIN }}
         OSS_SONATYPE_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
