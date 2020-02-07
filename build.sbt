@@ -3,7 +3,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "sbt-openapi-generator-plugin",
     organization := "com.github.mercurievv",
-    version := "0.0.1-SNAPSHOT",
+    version := "1.0.0",
     sbtPlugin := true,
     publishMavenStyle := true,
     scriptedLaunchOpts += ("-Dplugin.version=" + version.value),
