@@ -1,16 +1,30 @@
+/*
+ * Copyright (c) 2020 the SBT Openapi codegen plugin contributors.
+ * See the project homepage at: https://mercurievv.github.io/sbt-openapi-generator-plugin/
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.github.mercurievv.sbt.openapi.generator.plugin
 
 import java.util
 import java.util.{Map, ServiceLoader}
 
-import sbt._
-import Keys._
-import org.openapitools.codegen.{ClientOptInput, CodegenConfig, CodegenConfigLoader, CodegenConstants, DefaultGenerator, Generator, GeneratorNotFoundException, TemplatingEngineLoader}
 import _root_.io.swagger.v3.oas.models.OpenAPI
-import SwaggerGeneratorPlugin.autoImport.inputFile
-import org.apache.commons.lang3.StringUtils.isNotEmpty
-import org.openapitools.codegen.api.TemplatingEngineAdapter
-import org.openapitools.codegen.config.{CodegenConfigurator, Context, GeneratorSettings, WorkflowSettings}
+import org.openapitools.codegen.config.CodegenConfigurator
+import org.openapitools.codegen._
+import sbt.Keys._
+import sbt._
 
 /**
   * Created with IntelliJ IDEA.
@@ -32,7 +46,7 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
     lazy val inputFile       = settingKey[File]("inputFile")
     lazy val output          = settingKey[File]("output")
     lazy val config          = settingKey[File]("config")
-    lazy val generateSwagger = taskKey[Unit]("Generates files which includes all files from generator")
+    lazy val generateSwagger = taskKey[File]("Generates files which includes all files from generator")
 
     lazy val language                   = settingKey[String]("language")
     lazy val auth                       = settingKey[String]("auth")
@@ -83,7 +97,7 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
       val clientOptInput = new CodegenConfigurator() {
         import org.apache.commons.lang3.StringUtils.isNotEmpty
         import org.openapitools.codegen.api.TemplatingEngineAdapter
-        import org.openapitools.codegen.config.{CodegenConfigurator, Context, GeneratorSettings, WorkflowSettings}
+        import org.openapitools.codegen.config.{Context, GeneratorSettings, WorkflowSettings}
         override def toClientOptInput: ClientOptInput = {
           val context: Context[_]                  = toContext
           val workflowSettings: WorkflowSettings   = context.getWorkflowSettings
@@ -160,7 +174,7 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
               // classloader.
               Thread.currentThread().getContextClassLoader.loadClass(name)
             } catch {
-              case e: ClassNotFoundException => super.loadClass(name)
+              case _: ClassNotFoundException => super.loadClass(name)
             }
           }
         }
@@ -181,7 +195,7 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
   class CustomClassloadingCodegenConfigurator extends CodegenConfigurator {
     import org.apache.commons.lang3.StringUtils.isNotEmpty
     import org.openapitools.codegen.api.TemplatingEngineAdapter
-    import org.openapitools.codegen.config.{CodegenConfigurator, Context, GeneratorSettings, WorkflowSettings}
+    import org.openapitools.codegen.config.{Context, GeneratorSettings, WorkflowSettings}
     override def toClientOptInput: ClientOptInput = {
       val context: Context[_]                  = toContext
       val workflowSettings: WorkflowSettings   = context.getWorkflowSettings
@@ -259,7 +273,7 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
         // classloader.
         Thread.currentThread().getContextClassLoader.loadClass(name)
       } catch {
-        case e: ClassNotFoundException => super.loadClass(name)
+        case _: ClassNotFoundException => super.loadClass(name)
       }
     }
   }

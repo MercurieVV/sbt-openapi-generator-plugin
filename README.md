@@ -1,17 +1,32 @@
-[![Stable releaases in the Maven store](https://img.shields.io/maven-metadata/v/https/repo1.maven.org/maven2/com/github/mercurievv/sbt-openapi-generator-plugin/maven-metadata.xml.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.github.mercurievv%22%20AND%20a%3A%22sbt-openapi-generator-plugin%22)
-![Scala CI](https://github.com/MercurieVV/sbt-openapi-generator-plugin/workflows/Scala%20CI/badge.svg)
-# sbt-openapi-generator-plugin
-SBT Plugin to generate code from openapi/swagger specs
+# SBT Openapi codegen plugin
 
-SBT
-project/plugins.sbt
+[![Build](https://github.com/MercurieVV/sbt-openapi-generator-plugin/workflows/build/badge.svg?branch=master)](https://github.com/MercurieVV/sbt-openapi-generator-plugin/actions?query=branch%3Amaster+workflow%3Abuild) [![Release](https://github.com/MercurieVV/sbt-openapi-generator-plugin/workflows/release/badge.svg)](https://github.com/MercurieVV/sbt-openapi-generator-plugin/actions?query=workflow%3Arelease) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.mercurievv/sbt-openapi-generator-plugin-core_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.mercurievv/sbt-openapi-generator-plugin-core_2.13)
+
+Plugin to generate code from swagger/openapi specs
+
+## Usage
+
+The packages are published on Maven Central.
+
+```scala
+libraryDependencies += "com.github.mercurievv" %% "sbt-openapi-generator-plugin-core" % "<version>"
 ```
-addSbtPlugin("com.github.mercurievv" % "sbt-openapi-generator-plugin" % "1.0.0")
-```
-build.sbt
-```
-  .enablePlugins(SwaggerGeneratorPlugin)
-  .settings(
-    language := "scala",
-  )
-```
+
+## Documentation
+
+Links:
+
+- [Website](https://mercurievv.github.io/sbt-openapi-generator-plugin/)
+- [API documentation](https://mercurievv.github.io/sbt-openapi-generator-plugin//api/)
+
+## Contributing
+
+The SBT Openapi codegen plugin project welcomes contributions from anybody wishing to participate.  All code or documentation that is provided must be licensed with the same license that SBT Openapi codegen plugin is licensed with (Apache 2.0, see [LICENCE](./LICENSE.md)).
+
+People are expected to follow the [Scala Code of Conduct](./CODE_OF_CONDUCT.md) when discussing SBT Openapi codegen plugin on GitHub, Gitter channel, or other venues.
+
+Feel free to open an issue if you notice a bug, have an idea for a feature, or have a question about the code. Pull requests are also gladly accepted. For more information, check out the [contributor guide](./CONTRIBUTING.md).
+
+## License
+
+All code in this repository is licensed under the Apache License, Version 2.0.  See [LICENCE](./LICENSE.md).

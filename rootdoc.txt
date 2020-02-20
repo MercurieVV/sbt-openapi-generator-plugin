@@ -1,0 +1,6 @@
+Plugin to generate code from swagger/openapi specs
+
+Links:
+
+ - [[https://mercurievv.github.io/sbt-openapi-generator-plugin/ Homepage]]
+ - [[https://github.com/MercurieVV/sbt-openapi-generator-plugin GitHub repository]]
