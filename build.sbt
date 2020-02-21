@@ -7,8 +7,8 @@ import Boilerplate._
 // ---------------------------------------------------------------------------
 // Commands
 
-addCommandAlias("release", ";+clean ;ci-release ;unidoc")// ;microsite/publishMicrosite need jekyll
-addCommandAlias("ci", ";project root ;reload ;+clean ;+test:compile ;+test ;+package ;unidoc")// ;site/makeMicrosite need jekyll
+addCommandAlias("release", ";+clean ;ci-release ;unidoc ;microsite/publishMicrosite")
+addCommandAlias("ci", ";project root ;reload ;+clean ;+test:compile ;+test ;+package ;unidoc ;site/makeMicrosite")
 
 // ---------------------------------------------------------------------------
 // Dependencies
