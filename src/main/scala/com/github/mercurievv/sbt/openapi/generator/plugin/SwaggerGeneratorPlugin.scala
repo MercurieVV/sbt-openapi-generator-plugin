@@ -18,13 +18,14 @@
 package com.github.mercurievv.sbt.openapi.generator.plugin
 
 import java.util
-import java.util.{Map, ServiceLoader}
+import java.util.{ServiceLoader}
 
 import _root_.io.swagger.v3.oas.models.OpenAPI
 import org.openapitools.codegen.config.CodegenConfigurator
 import org.openapitools.codegen._
 import sbt.Keys._
 import sbt._
+import scala.collection.JavaConverters._
 
 /**
   * Created with IntelliJ IDEA.
@@ -43,36 +44,36 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
 
   trait PluginKeys {
 
-    lazy val inputFile       = settingKey[File]("inputFile")
-    lazy val output          = settingKey[File]("output")
-    lazy val config          = settingKey[File]("config")
+    lazy val inputFile = settingKey[File]("inputFile")
+    lazy val output = settingKey[File]("output")
+    lazy val config = settingKey[File]("config")
     lazy val generateSwagger = taskKey[File]("Generates files which includes all files from generator")
 
-    lazy val language                   = settingKey[String]("language")
-    lazy val auth                       = settingKey[String]("auth")
-    lazy val additionalProperties       = settingKey[Map[String, String]]("additionalProperties")
-    lazy val apiPackage                 = settingKey[String]("apiPackage")
-    lazy val artifactVersion            = settingKey[String]("artifactVersion")
-    lazy val gitRepoId                  = settingKey[String]("gitRepoId")
-    lazy val gitUserId                  = settingKey[String]("gitUserId")
-    lazy val httpUserAgent              = settingKey[String]("httpUserAgent")
-    lazy val ignoreFileOverride         = settingKey[String]("ignoreFileOverride")
-    lazy val importMappings             = settingKey[Map[String, String]]("importMappings")
-    lazy val instantiationTypes         = settingKey[String]("instantiationTypes")
-    lazy val invokerPackage             = settingKey[String]("invokerPackage")
-    lazy val languageSpecificPrimitives = settingKey[String]("languageSpecificPrimitives")
-    lazy val library                    = settingKey[String]("library")
-    lazy val modelNamePrefix            = settingKey[String]("modelNamePrefix")
-    lazy val modelNameSuffix            = settingKey[String]("modelNameSuffix")
-    lazy val modelPackage               = settingKey[String]("modelPackage")
-    lazy val releaseNote                = settingKey[String]("releaseNote")
-    lazy val reservedWordsMappings      = settingKey[String]("reservedWordsMappings")
-    lazy val skipOverwrite              = settingKey[String]("skipOverwrite")
-    lazy val templateDir                = settingKey[String]("templateDir")
-    lazy val typeMappings               = settingKey[String]("typeMappings")
-    lazy val verbose                    = settingKey[String]("verbose")
+    lazy val language = settingKey[String]("language")
+    lazy val auth = settingKey[String]("auth")
+    lazy val additionalProperties = settingKey[Map[String, AnyRef]]("additionalProperties")
+    lazy val apiPackage = settingKey[String]("apiPackage")
+    lazy val artifactVersion = settingKey[String]("artifactVersion")
+    lazy val gitRepoId = settingKey[String]("gitRepoId")
+    lazy val gitUserId = settingKey[String]("gitUserId")
+    lazy val httpUserAgent = settingKey[String]("httpUserAgent")
+    lazy val ignoreFileOverride = settingKey[String]("ignoreFileOverride")
+    lazy val importMappings = settingKey[Map[String, String]]("importMappings")
+    lazy val instantiationTypes = settingKey[Map[String, String]]("instantiationTypes")
+    lazy val invokerPackage = settingKey[String]("invokerPackage")
+    lazy val languageSpecificPrimitives = settingKey[Set[String]]("languageSpecificPrimitives")
+    lazy val library = settingKey[String]("library")
+    lazy val modelNamePrefix = settingKey[String]("modelNamePrefix")
+    lazy val modelNameSuffix = settingKey[String]("modelNameSuffix")
+    lazy val modelPackage = settingKey[String]("modelPackage")
+    lazy val releaseNote = settingKey[String]("releaseNote")
+    lazy val reservedWordsMappings = settingKey[Map[String, String]]("reservedWordsMappings")
+    lazy val skipOverwrite = settingKey[Boolean]("skipOverwrite")
+    lazy val templateDir = settingKey[String]("templateDir")
+    lazy val typeMappings = settingKey[Map[String, String]]("typeMappings")
+    lazy val verbose = settingKey[Boolean]("verbose")
 
-    lazy val swaggerClean   = taskKey[Unit]("Clean swagger generated packages")
+    lazy val swaggerClean = taskKey[Unit]("Clean swagger generated packages")
     lazy val swaggerCodeGen = taskKey[Seq[File]]("Generate code/documentation with swagger")
 
     lazy val swaggerModelCodeGen = taskKey[Seq[File]]("Generate swagger models and JSON converters")
@@ -83,12 +84,12 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
 
   import autoImport._
   override val requires: Plugins = plugins.JvmPlugin
-  override def trigger           = noTrigger
+  override def trigger = noTrigger
 
   override lazy val projectSettings = Seq(
-      generateSwagger := generateSwaggerTask.value,
-      inputFile := new File("swagger.yaml"),
-      output := target.value / "swagger"
+    generateSwagger := generateSwaggerTask.value,
+    inputFile       := new File("swagger.yaml"),
+    output          := target.value / "swagger"
   )
 
   lazy val generateSwaggerTask =
@@ -99,8 +100,8 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
         import org.openapitools.codegen.api.TemplatingEngineAdapter
         import org.openapitools.codegen.config.{Context, GeneratorSettings, WorkflowSettings}
         override def toClientOptInput: ClientOptInput = {
-          val context: Context[_]                  = toContext
-          val workflowSettings: WorkflowSettings   = context.getWorkflowSettings
+          val context: Context[_] = toContext
+          val workflowSettings: WorkflowSettings = context.getWorkflowSettings
           val generatorSettings: GeneratorSettings = context.getGeneratorSettings
           // We load the config via generatorSettings.getGeneratorName() because this is guaranteed to be set
           // regardless of entrypoint (CLI sets properties on this type, config deserialization sets on generatorSettings).
@@ -115,7 +116,8 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
           config.setEnablePostProcessFile(workflowSettings.isEnablePostProcessFile)
           config.setEnableMinimalUpdate(workflowSettings.isEnableMinimalUpdate)
           config.setStrictSpecBehavior(workflowSettings.isStrictSpecBehavior)
-          val templatingEngine: TemplatingEngineAdapter = TemplatingEngineLoader.byIdentifier(workflowSettings.getTemplatingEngineName)
+          val templatingEngine: TemplatingEngineAdapter =
+            TemplatingEngineLoader.byIdentifier(workflowSettings.getTemplatingEngineName)
           config.setTemplatingEngine(templatingEngine)
           // TODO: Work toward CodegenConfig having a "GeneratorSettings" property.
           config.instantiationTypes.putAll(generatorSettings.getInstantiationTypes)
@@ -131,25 +133,26 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
           }
           // any other additional properties?
           val templateDir: String = workflowSettings.getTemplateDir
-          if (templateDir != null) config.additionalProperties.put(CodegenConstants.TEMPLATE_DIR, workflowSettings.getTemplateDir)
+          if (templateDir != null)
+            config.additionalProperties.put(CodegenConstants.TEMPLATE_DIR, workflowSettings.getTemplateDir)
           val input: ClientOptInput = new ClientOptInput().config(config)
           input.openAPI(context.getSpecDocument.asInstanceOf[OpenAPI])
         }
 
         def forName(name: String, aClass: Class[CodegenConfig]): CodegenConfig = {
           println(name)
-          import scala.collection.JavaConverters._
           val services = ServiceLoader.load(aClass, aClass.getClassLoader).asScala
           val superclassServices = ServiceLoader.load(aClass, cloader).asScala
           val configsFound = (services ++ superclassServices).toSet
-          configsFound.find(_.getName == name)
+          configsFound
+            .find(_.getName == name)
             .orElse(Option(cloader.loadClass(name).newInstance().asInstanceOf[CodegenConfig]))
             .orElse(Option(Class.forName(name).getDeclaredConstructor().newInstance().asInstanceOf[CodegenConfig])) match {
-            case None => throw new GeneratorNotFoundException("Can't load config class with name '".concat(name) + "'\nAvailable:\n" + configsFound.mkString("\n"))
+            case None =>
+              throw new GeneratorNotFoundException(
+                "Can't load config class with name '".concat(name) + "'\nAvailable:\n" + configsFound.mkString("\n"))
             case Some(value) => value
           }
-
-
           // else try to load directly
           /*
                 try {
@@ -164,7 +167,7 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
                   case e: Exception =>
                     throw new GeneratorNotFoundException("Can't load config class with name '".concat(name) + "'\nAvailable:\n" + availableConfigs.toString, e)
                 }
-          */
+         */
         }
 
         val cloader = new ClassLoader(this.getClass.getClassLoader) {
@@ -178,10 +181,31 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
             }
           }
         }
-      }
-        .setInputSpec(inputFile.value.getPath)
+      }.setInputSpec(inputFile.value.getPath)
         .setOutputDir(output.value.getPath)
         .setGeneratorName(language.value)
+        .setAuth(auth.value)
+        .setAdditionalProperties(additionalProperties.value.asJava)
+        .setApiPackage(apiPackage.value)
+        .setArtifactVersion(artifactVersion.value)
+        .setGitRepoId(gitRepoId.value)
+        .setGitUserId(gitUserId.value)
+        .setHttpUserAgent(httpUserAgent.value)
+        .setIgnoreFileOverride(ignoreFileOverride.value)
+        .setImportMappings(importMappings.value.asJava)
+        .setInstantiationTypes(instantiationTypes.value.asJava)
+        .setInvokerPackage(invokerPackage.value)
+        .setLanguageSpecificPrimitives(languageSpecificPrimitives.value.asJava)
+        .setLibrary(library.value)
+        .setModelNamePrefix(modelNamePrefix.value)
+        .setModelNameSuffix(modelNameSuffix.value)
+        .setModelPackage(modelPackage.value)
+        .setReleaseNote(releaseNote.value)
+        .setReservedWordsMappings(reservedWordsMappings.value.asJava)
+        .setSkipOverwrite(skipOverwrite.value)
+        .setTemplateDir(templateDir.value)
+        .setTypeMappings(typeMappings.value.asJava)
+        .setVerbose(verbose.value)
         .toClientOptInput
       gen.opts(clientOptInput)
       try {
@@ -197,8 +221,8 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
     import org.openapitools.codegen.api.TemplatingEngineAdapter
     import org.openapitools.codegen.config.{Context, GeneratorSettings, WorkflowSettings}
     override def toClientOptInput: ClientOptInput = {
-      val context: Context[_]                  = toContext
-      val workflowSettings: WorkflowSettings   = context.getWorkflowSettings
+      val context: Context[_] = toContext
+      val workflowSettings: WorkflowSettings = context.getWorkflowSettings
       val generatorSettings: GeneratorSettings = context.getGeneratorSettings
       // We load the config via generatorSettings.getGeneratorName() because this is guaranteed to be set
       // regardless of entrypoint (CLI sets properties on this type, config deserialization sets on generatorSettings).
@@ -213,7 +237,8 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
       config.setEnablePostProcessFile(workflowSettings.isEnablePostProcessFile)
       config.setEnableMinimalUpdate(workflowSettings.isEnableMinimalUpdate)
       config.setStrictSpecBehavior(workflowSettings.isStrictSpecBehavior)
-      val templatingEngine: TemplatingEngineAdapter = TemplatingEngineLoader.byIdentifier(workflowSettings.getTemplatingEngineName)
+      val templatingEngine: TemplatingEngineAdapter =
+        TemplatingEngineLoader.byIdentifier(workflowSettings.getTemplatingEngineName)
       config.setTemplatingEngine(templatingEngine)
       // TODO: Work toward CodegenConfig having a "GeneratorSettings" property.
       config.instantiationTypes.putAll(generatorSettings.getInstantiationTypes)
@@ -229,7 +254,8 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
       }
       // any other additional properties?
       val templateDir: String = workflowSettings.getTemplateDir
-      if (templateDir != null) config.additionalProperties.put(CodegenConstants.TEMPLATE_DIR, workflowSettings.getTemplateDir)
+      if (templateDir != null)
+        config.additionalProperties.put(CodegenConstants.TEMPLATE_DIR, workflowSettings.getTemplateDir)
       val input: ClientOptInput = new ClientOptInput().config(config)
       input.openAPI(context.getSpecDocument.asInstanceOf[OpenAPI])
     }
@@ -240,16 +266,17 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
       val services = ServiceLoader.load(aClass, aClass.getClassLoader).asScala
       val superclassServices = ServiceLoader.load(aClass, cloader).asScala
       val configsFound = (services ++ superclassServices).toSet
-      configsFound.find(_.getName == name)
+      configsFound
+        .find(_.getName == name)
         .orElse(Option(cloader.loadClass(name).asInstanceOf[CodegenConfig]))
         .orElse(Option(Class.forName(name).getDeclaredConstructor().newInstance().asInstanceOf[CodegenConfig])) match {
-        case None => throw new GeneratorNotFoundException("Can't load config class with name '".concat(name) + "'\nAvailable:\n" + configsFound.mkString("\n"))
+        case None =>
+          throw new GeneratorNotFoundException(
+            "Can't load config class with name '".concat(name) + "'\nAvailable:\n" + configsFound.mkString("\n"))
         case Some(value) => value
       }
-
-
       // else try to load directly
-/*
+      /*
       try {
         // Try the context classloader first. But, during macro compilation, it's probably wrong, so fallback to this
         // classloader.
@@ -262,7 +289,7 @@ object SwaggerGeneratorPlugin extends AutoPlugin {
         case e: Exception =>
           throw new GeneratorNotFoundException("Can't load config class with name '".concat(name) + "'\nAvailable:\n" + availableConfigs.toString, e)
       }
-*/
+     */
     }
 
   }
