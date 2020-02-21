@@ -20,7 +20,7 @@ jobs:
           echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
           chmod 600 ~/.gnupg/*
           echo RELOADAGENT | gpg-connect-agent
-          echo $PGP_SECRET | base64 --decode | gpg --import --no-tty --batch --yes
+          echo $PGP_SECRET | base64 --decode --ignore-garbage | gpg --import --no-tty --batch --yes
         env:
           PGP_SECRET: ${{secrets.PGP_SECRET}}
 
