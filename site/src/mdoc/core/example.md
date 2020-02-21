@@ -12,7 +12,7 @@ Just a sample document.
 
 ```scala
 import cats.implicits._
-import com.github.mercurievv.sbt.openapi.generator.plugin.Example
+import com.github.mercurievv.sbt.openapi.generator.plugin
 
 Example.sumAll(List(1, 2, 3, 4))
 ```
